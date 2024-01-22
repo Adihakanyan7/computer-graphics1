@@ -23,19 +23,29 @@ Game::Game(float angle ,float relationWH, float near1, float far1) : Scene(angle
 
 void Game::Init()
 {		
-
-	AddShader("../res/shaders/pickingShader");	
-	AddShader("../res/shaders/basicShader");
+	//s:here by default, but I'm commenting this out and moving to the main func for readability
+	//AddShader("../res/shaders/pickingShader");	
+	//AddShader("../res/shaders/basicShader_grayscale");
 	
-	AddTexture("../res/textures/box0.bmp",false);
+	
+	//s: changed texture to the one included in the project, and added 4 instances of it
+	AddTexture("../res/textures/lenacolor.jpg",false); // bottom-left
+	AddTexture("../res/textures/lenacolor.jpg", false, 1); //top-left
+	AddTexture("../res/textures/lenacolor.jpg", false); //top-right
+	AddTexture("../res/textures/lenacolor.jpg", false); //bottom-right
+
 
 	AddShape(Plane,-1,TRIANGLES);
 	
 	pickedShape = 0;
 	
-	SetShapeTex(0,0);
+	//s: Setting up the 4 cameras, originally meant to point at different things, but eventually since I keep the same shape and just swap out textures I just left it as it is
 	MoveCamera(0,zTranslate,10);
+	MoveCamera(1, zTranslate, 10);
+	MoveCamera(2, zTranslate, 10);
+	MoveCamera(3, zTranslate, 10);
 	pickedShape = -1;
+	//pickedShape = -2;
 	
 	//ReadPixel(); //uncomment when you are reading from the z-buffer
 }
